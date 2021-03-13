@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   // };
 
   //Colden Products nesnesini yaratdiqda, httpClient deyiskenini gormemek ucun onu private edirik.
-  constructor(private httpClient: HttpClient) {}
+  constructor() {}
 
   //Products sehifede acilarken ilk dom terefinden ilk calistirilan metod. Formun load eventi kimi.
   ngOnInit(): void {
