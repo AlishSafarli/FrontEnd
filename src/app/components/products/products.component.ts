@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ProductResponseModel } from 'src/app/models/productResponseModel';
 import { Product } from 'src/app/models/products';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -10,15 +9,15 @@ import { Product } from 'src/app/models/products';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  apiUrl: string = 'https://localhost:44397/api/products';
-  // productResponseModel: ProductResponseModel = {
-  //   data: this.products,
-  //   message: '',
-  //   success: true,
-  // };
+  dataLoaded = false;
 
-  //Colden Products nesnesini yaratdiqda, httpClient deyiskenini gormemek ucun onu private edirik.
-  constructor() {}
+  /*
+  Angular-da bir servizi istifade etmek ucun onu 
+  saxladigimiz service-lerden istifade edeceyimizi import edib
+  komponentin constructor-na inject edirik.
+  */
+
+  constructor(private productService: ProductService) {}
 
   //Products sehifede acilarken ilk dom terefinden ilk calistirilan metod. Formun load eventi kimi.
   ngOnInit(): void {
@@ -26,11 +25,9 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    //Gelen data-ni ProductResponseModel-e map edirik.
-    this.httpClient
-      .get<ProductResponseModel>(this.apiUrl)
-      .subscribe((response) => {
-        this.products = response.data;
-      });
+    this.productService.getProducts().subscribe((response) => {
+      this.products = response.data;
+      this.dataLoaded = true;
+    });
   }
 }

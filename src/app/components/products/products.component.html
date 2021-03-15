@@ -1,4 +1,14 @@
-<table class="table table-bordered">
+<!-- <div *ngIf="dataLoaded==false" class="d-flex justify-content-center my-3">
+    <div class="spinner-border" role="status">
+    </div>
+    <span class="text-danger" id="demo">Loading...</span>
+</div> -->
+
+<div *ngIf="dataLoaded==false" class="d-flex justify-content-center my-3">
+    <div class="loader" *ngIf="dataLoaded==false"></div>
+</div>
+
+<table *ngIf="dataLoaded==true" class="table table-bordered table-secondary">
     <tr>
         <th>Product id</th>
         <th>Category Id</th>
