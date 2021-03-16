@@ -1,5 +1,14 @@
-<ul class="list-group">
-    <li class="list-group-item" *ngFor="let item of categories">
+<!-- <ul class="list-group">
+    <li *ngFor="let item of categories" (click)="setCurrentCategory(item)" [class]="getCurrentCategoryClass(item)">
         {{item.categoryName}}
     </li>
-</ul>
+</ul> -->
+
+<div class="list-group">
+    <!-- for dongusu ile kateqoriyalarin icin oxuyub, her bir kateqoriyani item-e atib, 
+        click zamani hemen clicklenmis itemi setCurrentCategory(category) metoduna otururuk.
+    Belece metot vasitesi ile click zamani hansi kateqoriyanin secilmis oldugunu bilirik. -->
+    <a href="#" *ngFor="let item of categories" (click)="setCurrentCategory(item)" [class]="getCurrentCategoryClass(item)" aria-current="true" routerLink="products/category/{{item.categoryId}}">
+        {{item.categoryName}}
+    </a>
+</div>
