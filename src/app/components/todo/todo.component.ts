@@ -18,8 +18,8 @@ export class TodoComponent implements OnInit {
   }
 
   getToDos() {
-    this.httpClient.get<ToDo[]>(this.apiUrl).subscribe((data) => {
-      this.todos = data;
+    this.httpClient.get<ToDo[]>(this.apiUrl).subscribe((response) => {
+      this.todos = response;
     });
   }
 }

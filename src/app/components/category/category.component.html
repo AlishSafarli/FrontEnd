@@ -1,14 +1,15 @@
-<!-- <ul class="list-group">
-    <li *ngFor="let item of categories" (click)="setCurrentCategory(item)" [class]="getCurrentCategoryClass(item)">
-        {{item.categoryName}}
-    </li>
-</ul> -->
-
+<!-- 
+routerLink: built-in  attr. asp-action-route kimi fealiyyet gosterir
+[class]: type script terefinden metot cagira bilmem ucun moterize ile yazilir
+getCurrentCategoryClass: secilmis kateqoriyani bu metoda otururuk, secili olana active 
+olmayan normal list klassi elave edir-->
 <div class="list-group">
-    <!-- for dongusu ile kateqoriyalarin icin oxuyub, her bir kateqoriyani item-e atib, 
+    <!-- <a [class]="getAllCategoryClass()" routerLink="products">All
+        Categories</a> -->
+    <!-- for dongusu ile kateqoriyalarin icin gezib, her bir kateqoriyani item-e atib, 
         click zamani hemen clicklenmis itemi setCurrentCategory(category) metoduna otururuk.
-    Belece metot vasitesi ile click zamani hansi kateqoriyanin secilmis oldugunu bilirik. -->
-    <a href="#" *ngFor="let item of categories" (click)="setCurrentCategory(item)" [class]="getCurrentCategoryClass(item)" aria-current="true" routerLink="products/category/{{item.categoryId}}">
+    Belece metod vasitesi ile click zamani hansi kateqoriyanin secilmis oldugunu bilirik. -->
+    <a *ngFor="let item of categories" (click)="setCurrentCategory(item)" [class]="getCurrentCategoryClass(item)" aria-current="true" routerLink="products/category/{{item.categoryId}}">
         {{item.categoryName}}
     </a>
 </div>

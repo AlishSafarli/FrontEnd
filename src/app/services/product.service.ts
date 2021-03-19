@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GenericResponseModel } from '../models/genericResponseModel';
-import { Product } from '../models/products';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  apiUrl: string = 'https://localhost:44397/api/';
+  apiUrl: string = 'https://api.alishsafarli.com/api/';
 
   constructor(private httpClient: HttpClient) {}
 

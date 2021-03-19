@@ -10,6 +10,8 @@ import { CategoryService } from 'src/app/services/category.service';
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
   currentCategory: Category;
+  isAllSelected: boolean;
+  CurrentAll: Category[];
 
   constructor(private categoryService: CategoryService) {}
 
@@ -27,11 +29,24 @@ export class CategoryComponent implements OnInit {
     this.currentCategory = category;
   }
 
+  // setAllCategory() {
+  //   this.currentCategory =
+  // }
+
   getCurrentCategoryClass(category: Category) {
     if (category == this.currentCategory) {
       return 'list-group-item list-group-item-action active';
     } else {
       return 'list-group-item list-group-item-action';
+    }
+  }
+
+  getAllCategoryClass() {
+    if (!this.currentCategory) {
+      this.currentCategory = { categoryId: 0, categoryName: '' };
+      return 'list-group-item list-group-item-action active';
+    } else {
+      return 'list-group-item  list-group-item-action';
     }
   }
 }

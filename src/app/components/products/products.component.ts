@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/models/products';
+import { ToastrService } from 'ngx-toastr';
+import { JoinedProducts } from 'src/app/models/joinedProducts';
+import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -10,6 +12,8 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
+  joinedProducts: JoinedProducts[] = [];
+  filterText = '';
   dataLoaded = false;
 
   /*
@@ -18,7 +22,8 @@ export class ProductsComponent implements OnInit {
   */
   constructor(
     private productService: ProductService,
-    private activadedRoute: ActivatedRoute
+    private activadedRoute: ActivatedRoute,
+    private toastService: ToastrService
   ) {}
 
   //Products sehifede acilarken ilk dom terefinden ilk calistirilan metod. Formun load eventi kimi.
@@ -28,10 +33,9 @@ export class ProductsComponent implements OnInit {
       if (params['categoryId']) {
         this.getProductsByCategory(params['categoryId']);
       } else {
-        this.products;
+        this.getProducts();
       }
     });
-    this.getProducts();
   }
 
   getProducts() {
@@ -48,5 +52,9 @@ export class ProductsComponent implements OnInit {
         this.products = response.data;
         this.dataLoaded = true;
       });
+  }
+
+  addToCart(product: Product) {
+    this.toastService.success('Əlavə edildi', product.productName);
   }
 }

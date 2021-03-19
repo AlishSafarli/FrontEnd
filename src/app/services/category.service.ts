@@ -8,10 +8,11 @@ import { GenericResponseModel } from '../models/genericResponseModel';
   providedIn: 'root',
 })
 export class CategoryService {
-  apiUrl: string = 'https://localhost:44397/api/categories/getall';
+  apiUrl: string = 'https://api.alishsafarli.com/api/';
   constructor(private httpClient: HttpClient) {}
 
   getCategories(): Observable<GenericResponseModel<Category>> {
-    return this.httpClient.get<GenericResponseModel<Category>>(this.apiUrl);
+    let path = this.apiUrl + 'categories/getall';
+    return this.httpClient.get<GenericResponseModel<Category>>(path);
   }
 }

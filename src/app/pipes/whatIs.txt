@@ -1,0 +1,3 @@
+Pipe: ingilis dilindən tərcümədə boru deməkdir.
+Məsələn xxx.component.ts-dən gələn data-ları xxx.component.html-də fərqli şəkildə göstərmək, manipulasiya etmək üçün
+nəzərdə tutulub.
