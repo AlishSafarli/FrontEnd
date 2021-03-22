@@ -9,15 +9,17 @@
     <label for="filterText" class="form-label">Search</label>
     <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Type product to search">
 </div>
-<div *ngIf="filterText.length>2" class="alert alert-success">
+
+
+<div *ngIf="filterText.length>2 " class="alert alert-success">
     you searched "{{filterText}}"
 </div>
 
-<div *ngIf="dataLoaded==false" class="d-flex justify-content-center my-3">
+<!-- <div *ngIf="dataLoaded==false" class="d-flex justify-content-center my-3">
     <div class="loader"></div>
-</div>
+</div> -->
 
-<table *ngIf="dataLoaded==true" class="table table-bordered table-striped">
+<table class="table table-bordered table-striped">
     <thead class="bg-primary text-white">
         <tr>
             <th>Product id</th>

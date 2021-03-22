@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,6 +13,9 @@ import { EdvProductPipe } from './pipes/edv-product.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { InterceptorService } from './spinner/interceptor.service';
 
 @NgModule({
   //Components are declared here.
@@ -25,6 +28,8 @@ import { ToastrModule } from 'ngx-toastr';
     NaviComponent,
     EdvProductPipe,
     FilterPipe,
+    CartSummaryComponent,
+    SpinnerComponent,
   ],
   //Built-in libraries here
   imports: [
@@ -35,7 +40,9 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

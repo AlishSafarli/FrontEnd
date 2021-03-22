@@ -17,7 +17,7 @@ export class FilterPipe implements PipeTransform {
     return filterText
       ? value.filter(
           (p: Product) =>
-            p.productName.toLocaleLowerCase().indexOf(filterText) !== -1
+            p.productName.toLocaleLowerCase().indexOf(filterText) !== -1 // yeniki varsa
         )
       : value;
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Category } from '../models/category';
 import { GenericResponseModel } from '../models/genericResponseModel';
 
@@ -8,11 +9,10 @@ import { GenericResponseModel } from '../models/genericResponseModel';
   providedIn: 'root',
 })
 export class CategoryService {
-  apiUrl: string = 'https://api.alishsafarli.com/api/';
   constructor(private httpClient: HttpClient) {}
 
   getCategories(): Observable<GenericResponseModel<Category>> {
-    let path = this.apiUrl + 'categories/getall';
+    let path = environment.apiBaseURL + 'categories/getall';
     return this.httpClient.get<GenericResponseModel<Category>>(path);
   }
 }

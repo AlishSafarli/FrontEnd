@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { JoinedProducts } from 'src/app/models/joinedProducts';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -15,7 +16,6 @@ export class ProductsComponent implements OnInit {
   joinedProducts: JoinedProducts[] = [];
   filterText = '';
   dataLoaded = false;
-
   /*
   Angular-da bir servizi componentde istifade etmek ucun onun using-ni(import)
   elave edib, consturctora inject etmek lazimdir.
@@ -55,6 +55,10 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.toastService.success('Əlavə edildi', product.productName);
+    if (product.productId === 1) {
+      this.toastService.error('Xeta! Elave edile bilmez', product.productName);
+    } else {
+      this.toastService.success('Əlavə edildi', product.productName);
+    }
   }
 }
