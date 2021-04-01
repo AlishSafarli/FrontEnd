@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { JoinedProducts } from 'src/app/models/joinedProducts';
 import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
+  product: Product;
   joinedProducts: JoinedProducts[] = [];
   filterText = '';
   dataLoaded = false;
@@ -23,7 +25,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private activadedRoute: ActivatedRoute,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private cartService: CartService
   ) {}
 
   //Products sehifede acilarken ilk dom terefinden ilk calistirilan metod. Formun load eventi kimi.
@@ -32,6 +35,8 @@ export class ProductsComponent implements OnInit {
       //Params-in icerisinde olan string routingde qeyd olundugu kimi yazilmalidir. LetterSensetive
       if (params['categoryId']) {
         this.getProductsByCategory(params['categoryId']);
+      } else if (params['productId']) {
+        this.getProductByid(params['productId']);
       } else {
         this.getProducts();
       }
@@ -59,6 +64,13 @@ export class ProductsComponent implements OnInit {
       this.toastService.error('Xeta! Elave edile bilmez', product.productName);
     } else {
       this.toastService.success('Əlavə edildi', product.productName);
+      this.cartService.addToCart(product);
     }
+  }
+
+  getProductByid(productId: number) {
+    this.productService
+      .getProductById(productId)
+      .subscribe((response) => (this.product = response.data));
   }
 }

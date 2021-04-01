@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { GenericResponseModel } from '../models/genericResponseModel';
+import { GenericSingleModel } from '../models/genericSingleModel';
 import { Product } from '../models/product';
+import { ResponseModel } from '../models/responseModel';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +27,17 @@ export class ProductService {
       'products/getallbycategory?categoryId=' +
       categoryId;
     return this.httpClient.get<GenericResponseModel<Product>>(newPath);
+  }
+
+  getProductById(productId: number): Observable<GenericSingleModel<Product>> {
+    return this.httpClient.get<GenericSingleModel<Product>>(
+      environment.apiBaseURL + 'products/getbyid/?id=' + productId
+    );
+  }
+  add(product: Product): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(
+      environment.apiBaseURL + 'products/add',
+      product
+    );
   }
 }

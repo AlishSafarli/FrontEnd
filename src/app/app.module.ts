@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { InterceptorService } from './spinner/interceptor.service';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { ProductAddComponent } from './components/product-add/product-add.component';
 
 @NgModule({
   //Components are declared here.
@@ -28,8 +30,10 @@ import { InterceptorService } from './spinner/interceptor.service';
     NaviComponent,
     EdvProductPipe,
     FilterPipe,
-    CartSummaryComponent,
     SpinnerComponent,
+    CartSummaryComponent,
+    ProductDetailsComponent,
+    ProductAddComponent,
   ],
   //Built-in libraries here
   imports: [
@@ -39,6 +43,7 @@ import { InterceptorService } from './spinner/interceptor.service';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

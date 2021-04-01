@@ -1,13 +1,22 @@
-<li class="nav-item dropdown">
+<li *ngIf="cartItems.length>0" class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown
+        Сart
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li *ngFor="let item of  cartItems">
+            <a type="button" class="dropdown-item" routerLink="products/productid/{{item.product.productId}}">
+                {{item.product.productName}}
+                <span style="color: rgb(12, 12, 37);font-size: large;">| {{item.quantity}}</span>
+                <span> </span>
+                <span type="button" style="color: rgb(12, 12, 37);font-size: large;"
+                    (click)="removeFromCart(item.product)">
+                    | Sil </span>
+            </a>
+
+        </li>
         <li>
             <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item">Go to Cart</a></li>
     </ul>
 </li>

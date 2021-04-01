@@ -9,48 +9,75 @@
     <label for="filterText" class="form-label">Search</label>
     <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Type product to search">
 </div>
-
-
 <div *ngIf="filterText.length>2 " class="alert alert-success">
     you searched "{{filterText}}"
 </div>
-
 <!-- <div *ngIf="dataLoaded==false" class="d-flex justify-content-center my-3">
     <div class="loader"></div>
 </div> -->
+<div class="table-responsive">
+    <table class="table table-bordered table-striped" *ngIf="!product">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Product id</th>
+                <th>Category Id</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Price with vat</th>
+                <th>unitsInStock</th>
+                <th>Add to cart</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of products | filter:filterText">
+                <td>{{item.productId}}</td>
+                <td>{{item.categoryId}}</td>
+                <!-- productName-e bir pipe elave etdik gelen datalarin kicik herfe transform edib gostermesin deyirik -->
+                <td>{{item.productName |lowercase}}</td>
 
-<table class="table table-bordered table-striped">
-    <thead class="bg-primary text-white">
-        <tr>
-            <th>Product id</th>
-            <th>Category Id</th>
-            <th>Product Name</th>
-            <th>Product Price</th>
-            <th>Price with vat</th>
-            <th>unitsInStock</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of products | filter:filterText">
-            <td>{{item.productId}}</td>
-            <td>{{item.categoryId}}</td>
-            <!-- productName-e bir pipe elave etdik gelen datalarin kicik herfe transform edib gostermesin deyirik -->
-            <td>{{item.productName |lowercase}}</td>
-
-            <td>{{item.unitPrice |currency}}</td>
-
-            <!-- Ozumden custom pipe elave edirem ve deyirem ki 
+                <td>{{item.unitPrice |currency}}</td>
+                <!-- Ozumden custom pipe elave edirem ve deyirem ki 
             gelen qiymetlerin edv faizi ile birge gostermek isteyirem.
         
             currency: built-in function
 
             Transform metododundaki value: unitPrice, args: edvProduct
         -->
-            <td>{{item.unitPrice | edvProduct:18| currency}}</td>
+                <td>{{item.unitPrice | edvProduct:18| currency}}</td>
 
-            <td>{{item.unitsInStock}}</td>
-            <td><button (click)="addToCart(item)" class="btn btn-primary">Add to cart</button></td>
-        </tr>
-    </tbody>
-</table>
+                <td>{{item.unitsInStock}}</td>
+                <td><button (click)="addToCart(item)" class="btn btn-primary">Add to cart</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="product" class="table table-bordered table-striped">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>Product id</th>
+                <th>Category Id</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Price with vat</th>
+                <th>unitsInStock</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{product.productId}}</td>
+                <td>{{product.categoryId}}</td>
+                <!-- productName-e bir pipe elave etdik gelen datalarin kicik herfe transform edib gostermesin deyirik -->
+                <td>{{product.productName |lowercase}}</td>
+                <td>{{product.unitPrice |currency}}</td>
+                <!-- Ozumden custom pipe elave edirem ve deyirem ki 
+            gelen qiymetlerin edv faizi ile birge gostermek isteyirem.
+            currency: built-in function
+            Transform metododundaki value: unitPrice, args: edvProduct
+        -->
+                <td>{{product.unitPrice | edvProduct:18| currency}}</td>
+                <td>{{product.unitsInStock}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
